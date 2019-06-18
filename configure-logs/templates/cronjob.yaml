@@ -21,14 +21,6 @@ spec:
             - name: {{ .Chart.Name }}
               image: "{{ required "Value env.repository is required!" .Values.env.repository }}/{{ required "Value env.tag is required!" .Values.env.tag }}-{{ .Chart.Name }}:{{ .Chart.AppVersion }}"
               imagePullPolicy: Always
-              env:
-                - name: NODE_TLS_REJECT_UNAUTHORIZED
-                  value: "0"
-                - name: REGION
-                  valueFrom:
-                    configMapKeyRef:
-                      name: kaltura-environment
-                      key: env.region
           restartPolicy: OnFailure
           nodeSelector:
             kaltura.role: core
