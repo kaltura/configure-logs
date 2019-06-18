@@ -1,0 +1,43 @@
+input {
+  beats {
+    port => 5044
+    add_field => { 
+      "es_out" => "true"
+      "s3_out" => "true"
+    }
+  }
+}
+filter {  
+  if ![service] {
+    if ![kubernetes][container][name] {
+      drop {}
+    }
+    mutate {
+      add_field => {
+      "service" => "%{[kubernetes][container][name]}"
+      }
+    }
+  }
+  
+  if [service] == "filebeat" {
+    drop {}
+  }
+  if [service] == "kibana" {
+    drop {}
+  }
+  if [service] == "kubernetes-dashboard" {
+    drop {}
+  }
+  if [service] == "logstash" {
+    drop {}
+  }
+  if [service] == "tiller" {
+    drop {}
+  }
+  if [service] == "vpc-resource-controller" {
+    drop {}
+  }
+  if [service] == "elasticsearch" {
+    drop {}
+  }
+}

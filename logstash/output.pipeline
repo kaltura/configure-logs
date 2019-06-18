@@ -1,0 +1,20 @@
+output {
+  if [es_out] == "true" {
+    elasticsearch {
+      hosts => ["${ELASTICSEARCH_HOST}:${ELASTICSEARCH_PORT}"]
+      index => "%{service}-%{+YYYY.MM.dd}"
+    }
+  }
+  if [s3_out] == "true" {
+    s3 {
+      region => "${REGION}"
+      bucket => "${S3_LOGS_BUCKET}"
+      encoding => "gzip"
+      prefix => "%{service}/%{+YYYY}/%{+MM}/%{+dd}"
+      rotation_strategy => "time"
+      time_file => 60
+      codec => "json_lines"
+      temporary_directory => '/usr/share/logstash/data/s3'
+    }
+  }
+}

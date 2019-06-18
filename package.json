@@ -1,0 +1,12 @@
+{
+  "name": "configure-logs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@kubernetes/client-node": "^0.10.1"
+  }
+}
