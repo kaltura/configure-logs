@@ -16,6 +16,10 @@ pipeline {
                 script {
                     docker.build("configure-logs:$BUILD_NUMBER", "--build-arg VERSION=$version .")
                 }
+            }
+        }
+        stage('Deploy') {
+            steps {
                 deploy('configure-logs', "$version")
             }
         }
