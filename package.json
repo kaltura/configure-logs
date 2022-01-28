@@ -7,6 +7,6 @@
     "start": "node index.js"
   },
   "dependencies": {
-    "@kubernetes/client-node": "^0.10.1"
+    "@kubernetes/client-node": "^0.16.1"
   }
 }
